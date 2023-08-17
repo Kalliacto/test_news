@@ -4,7 +4,7 @@ import NewList from '../../components/NewList/NewList';
 
 const NewsPage = (props) => {
     return (
-        <div>
+        <div className={s.container}>
             <NewList />
         </div>
     );
