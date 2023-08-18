@@ -53,7 +53,7 @@ const newsSlice = createSlice({
             state.isLoading = false;
             state.oneNews = action.payload;
         });
-        builder.addMatcher(isPending(getAllNews, getOneNews), (state) => {
+        builder.addMatcher(isPending(getOneNews), (state) => {
             state.isLoading = true;
         });
     },
