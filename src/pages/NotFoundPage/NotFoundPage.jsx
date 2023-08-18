@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './NotFoundPage.module.scss';
 import nfp from '../../assets/img/NotFound.svg';
-import BtnBackToHome from '../../components/BtnBackToHome/BtnBackToHome';
+import Btn from '../../components/Btn/Btn';
 
 const NotFoundPage = ({ title }) => {
     return (
@@ -9,7 +9,7 @@ const NotFoundPage = ({ title }) => {
             <div className={s.notFoundPage}>
                 <img className={s.notFoundPage__img} src={nfp} alt='sad smile' />
                 <h2 className={s.notFoundPage__title}>{title}</h2>
-                <BtnBackToHome />
+                <Btn title={'< Назад'} />
             </div>
         </>
     );
