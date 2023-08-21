@@ -8,6 +8,11 @@
     &__title {
         font-size: 16px;
         font-weight: 600;
+        transition: all 0.3s;
+    }
+    &__title:hover {
+        text-decoration: underline #f7cc50;
+        color: #f7cc50;
     }
     &__info {
         display: flex;
