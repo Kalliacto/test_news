@@ -1,20 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './NewsPageView.module.scss';
 import Btn from '../../components/Btn/Btn';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOneNews } from '../../storage/slices/newsSlice';
+import { getComments, getOneNews } from '../../storage/slices/oneNewsSlice';
 import { dateAdjustment } from '../../utils/utils';
 import Preloader from '../../components/Preloader/Preloader';
+import CommentsList from '../../components/CommentsList/CommentsList';
 
 const NewsPageView = React.memo(() => {
     const { id } = useParams();
-    const { oneNews, isLoading } = useSelector((s) => s.news);
+    const { oneNews, isLoading, commentsList } = useSelector((s) => s.oneNews);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getOneNews(id));
     }, [id, dispatch]);
+
+    useEffect(() => {
+        !!oneNews.kids && dispatch(getComments(oneNews.kids));
+    }, [oneNews.kids, dispatch]);
 
     return (
         <div className={s.card}>
@@ -36,7 +41,11 @@ const NewsPageView = React.memo(() => {
                             </a>
                         </div>
                     )}
-                    <p>Комментариев: {oneNews.kids ? oneNews.kids.length : 0}</p>
+                    {!!oneNews.kids ? (
+                        <CommentsList commentsList={commentsList} commentInfo={oneNews.kids} />
+                    ) : (
+                        <p>Здесь пока нет ни одного комментария</p>
+                    )}
                 </article>
             )}
         </div>

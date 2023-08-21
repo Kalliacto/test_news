@@ -4,7 +4,7 @@ import s from './NewsCard.module.scss';
 import { dateAdjustment } from '../../utils/utils';
 
 const NewsCard = (elem) => {
-    const { time, by, score } = elem;
+    const { time, by, score, kids } = elem;
 
     return (
         <li className={s.card}>
@@ -15,6 +15,7 @@ const NewsCard = (elem) => {
                 <span>Рейтинг: {score}</span>
                 <span>Автор: {by}</span>
                 <span>Время: {dateAdjustment(time)}</span>
+                <span>Комментариев: {kids?.length ? kids?.length : '0'}</span>
             </div>
         </li>
     );
