@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, isPending } from '@reduxjs/toolkit';
-import { getNews, getNewsOne } from '../../utils/api';
+import { getComment, getNews, getNewsOne } from '../../utils/api';
 
 const initialState = {
     newsList: [],
     isLoading: false,
-    oneNews: {},
+    // oneNews: {},
 };
 
 export const getAllNews = createAsyncThunk(
@@ -15,18 +15,6 @@ export const getAllNews = createAsyncThunk(
             const newsList = await Promise.allSettled(allNewsIds.map((i) => getNewsOne(i)));
 
             return fulfillWithValue(newsList);
-        } catch (error) {
-            return rejectWithValue(error);
-        }
-    }
-);
-
-export const getOneNews = createAsyncThunk(
-    'oneNews/getOneNews',
-    async (idNews, { fulfillWithValue, rejectWithValue }) => {
-        try {
-            const oneNews = await getNewsOne(idNews);
-            return fulfillWithValue(oneNews);
         } catch (error) {
             return rejectWithValue(error);
         }
@@ -49,11 +37,7 @@ const newsSlice = createSlice({
                 }
             }, []);
         });
-        builder.addCase(getOneNews.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.oneNews = action.payload;
-        });
-        builder.addMatcher(isPending(getOneNews), (state) => {
+        builder.addMatcher(isPending(getAllNews), (state) => {
             state.isLoading = true;
         });
     },

@@ -1,0 +1,12 @@
+.comments {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-top: 1px solid #f7cc50;
+    padding: 5px;
+
+    &__info {
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
