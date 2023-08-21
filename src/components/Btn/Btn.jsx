@@ -1,13 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import s from './Btn.module.scss';
 
 const Btn = ({ title }) => {
+    const navigate = useNavigate();
+    const goBack = () => {
+        navigate(-1);
+    };
+
     return (
         <>
-            <Link to={'/'}>
-                <button className={s.btn}>{title}</button>
-            </Link>
+            <button onClick={goBack} className={s.btn}>
+                {title}
+            </button>
         </>
     );
 };
