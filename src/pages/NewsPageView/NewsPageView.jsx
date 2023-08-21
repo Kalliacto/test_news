@@ -18,7 +18,11 @@ const NewsPageView = React.memo(() => {
     }, [id, dispatch]);
 
     useEffect(() => {
-        !!oneNews.kids && dispatch(getComments(oneNews.kids));
+        !!oneNews.kids &&
+            dispatch(getComments(oneNews.kids)) &&
+            setInterval(() => {
+                dispatch(getComments(oneNews.kids));
+            }, 60000);
     }, [oneNews.kids, dispatch]);
 
     return (
